@@ -7,8 +7,9 @@
 #include <netinet/in.h>
 #include <cstring>
 #include <vector>
+#include "communicator.hpp"
 
-namespace mstd {
+namespace sockets {
     class socket_host {
     private:
         int _port;
@@ -16,6 +17,7 @@ namespace mstd {
         bool _bound;
         int _sock_fd;
         int _client_fd;
+        communicator _communicator;
     public:
         explicit socket_host(int port);
 
@@ -23,15 +25,19 @@ namespace mstd {
 
         bool is_open();
 
-        void get_connections(int max_queue = 5);
+        int get_connections(int max_queue = 5);
 
         void close_client();
 
         void stop();
 
-        bool send_msg(std::string message, int flags = 0);
+        bool send_msg(std::string message);
 
         std::string receive_msg();
+
+        int expose_fd();
+
+        communicator &expose_communicator();
     };
 
 }

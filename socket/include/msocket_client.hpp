@@ -9,14 +9,16 @@
 #include <sys/types.h>
 #include <cstring>
 #include "message.hpp"
+#include "communicator.hpp"
 
-namespace mstd {
+namespace sockets {
     class socket_client {
     private:
         bool _opened;
         bool _host_found;
         int _sock_fd;
         struct sockaddr_in _serv;
+        communicator _communicator;
     public:
         socket_client(std::string host, int port);
 
@@ -29,6 +31,10 @@ namespace mstd {
         std::string receive_msg(int flags = 0);
 
         void close_connection();
+
+        int expose_fd();
+
+        communicator &expose_communicator();
     };
 }
 

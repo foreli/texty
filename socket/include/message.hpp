@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-namespace mstd {
+namespace sockets {
     std::string get_as_sock_msg(const std::string &s);
 
     std::string strip(std::string &s);
